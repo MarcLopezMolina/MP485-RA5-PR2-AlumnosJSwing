@@ -9,7 +9,7 @@ public class StudentRegister
     public static void main(String[] args) throws IOException
     {
         StudentManager.initFiles();
-        
+        //test
         int option = 0;
         boolean exit = false;
         
