@@ -1,18 +1,24 @@
 package main;
 
-
-import java.io.IOException;
-import libraries.ScannerLib;
+import frames.MainMenu;
 
 public class StudentRegister
 {
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args)
     {
         StudentManager.initFiles();
-        //test
+        
+        MainMenu menu = new MainMenu();
+        menu.setVisible(true);
+        
+        
+        /*
+            PREVIOUS CODE
+        */
+        
+        /*
         int option = 0;
         boolean exit = false;
-        
         do
         {
             System.out.println("\n===========================");
@@ -38,5 +44,6 @@ public class StudentRegister
         }
         while (exit == false);
         System.out.println("Exiting the program...");
+        */
     }
 }

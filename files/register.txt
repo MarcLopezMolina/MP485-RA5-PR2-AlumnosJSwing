@@ -2,3 +2,5 @@ Marc,Lopez,18,DAM,111A
 Victor,Liu,22,DAM,222B
 Patrick,Esquibal,19,DAM,333C
 Victor,Liu,23,DAM,444D
+Jonji,Salango,18,DAM,123123A
+Casey,Cleto,18,DAM,123123D

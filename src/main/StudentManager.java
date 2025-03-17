@@ -76,21 +76,9 @@ public class StudentManager
     }
 
     //Asks the user diferent parameters and creates a Student object. Then writes the new line to the register.
-    public static void newStudent() throws IOException
+    public static void newStudent(String name, String surname,int age, String course, String dni) throws IOException
     {
         BufferedWriter bufW = new BufferedWriter(new FileWriter(register, true)); 
-
-        System.out.println("\nIntroduce the student data: ");
-        System.out.print("Name: ");
-        String name = ScannerLib.scannerString();
-        System.out.print("Surname: ");
-        String surname = ScannerLib.scannerString();
-        System.out.print("Age: ");
-        int age = ScannerLib.scannerInt();
-        System.out.print("Course: ");
-        String course = ScannerLib.scannerString();
-        System.out.print("DNI: ");
-        String dni = ScannerLib.scannerString();
 
         Student newStudent = new Student(name, surname, age, course, dni);
         studentsList.add(newStudent);
@@ -125,15 +113,9 @@ public class StudentManager
         }
     }
     
-    //Shows all students and search if there are a student with the DNI provided by the user. If exists, gets deleted.
-    public static void deleteStudent() throws IOException
+    //Searchs if there are a student with the DNI provided by the user, if exists, gets deleted.
+    public static void deleteStudent(String dni) throws IOException
     {
-        System.out.println("\nThis is the list of all students");
-
-        showStudents();
-
-        System.out.print("\nType the DNI of the student that you want to delete: ");
-        String dni = ScannerLib.scannerString();
         boolean found = false;
 
         ArrayList<Student> updatedStudentsList = new ArrayList<>();
@@ -161,8 +143,8 @@ public class StudentManager
 
             bufW.flush();
             bufW.close();
-
-            studentsList = updatedStudentsList; // Actualizar la lista en memoria
+            
+            studentsList = updatedStudentsList;
 
             System.out.println("The student was successfully deleted.");
         }
@@ -173,36 +155,26 @@ public class StudentManager
     }
 
     //Asks the user to type a DNI and shows all the student data.
-    public static void searchStudent() throws IOException
+    public static String searchStudent(String dni) throws IOException
     {
-        System.out.print("\nType the DNI of the student you want to search: ");
-        String dni = ScannerLib.scannerString();
-        boolean found = false;
-
         BufferedReader bufR = new BufferedReader(new FileReader(register));
         String line;
+        String studentData = "No student found.";
 
         while ((line = bufR.readLine()) != null)
         {
             String[] parts = line.split(",");
             if (parts.length == 5 && parts[4].equalsIgnoreCase(dni))
             {
-                System.out.println("\nStudent found:");
-                System.out.println("Name: " + parts[0]);
-                System.out.println("Surname: " + parts[1]);
-                System.out.println("Age: " + parts[2]);
-                System.out.println("Course: " + parts[3]);
-                System.out.println("DNI: " + parts[4]);
-                found = true;
+                studentData = "Name: " + parts[0] + "\nSurname: " + parts[1]
+                        + "\nAge: " + parts[2] + "\nCourse: " + parts[3]
+                        + "\nDNI: " + parts[4];
                 break;
             }
         }
 
         bufR.close();
-
-        if (found = false)
-        {
-            System.out.println("\nNo student found with that DNI.");
-        }
+        return studentData;
     }
-}  
+
+}
